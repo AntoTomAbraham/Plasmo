@@ -29,6 +29,7 @@ dependencies:
   get: ^4.1.4
   font_awesome_flutter: ^9.0.0
   material_design_icons_flutter: ^4.0.5955
+  eva_icons_flutter: ^3.0.0
 
 
   # The following adds the Cupertino Icons font to your application.
