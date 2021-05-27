@@ -32,6 +32,10 @@ dependencies:
   eva_icons_flutter: ^3.0.0
   razorpay_flutter: ^1.2.6
   toast: ^0.1.5
+  cloud_firestore: ^2.2.0
+  firebase_core: ^1.2.0
+  firebase_auth: ^1.2.0
+  google_sign_in: ^5.0.3
 
 
   # The following adds the Cupertino Icons font to your application.

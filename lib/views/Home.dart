@@ -8,7 +8,12 @@ import 'package:plasmacovid_app/Widgets/PreventionContainer.dart';
 import 'package:plasmacovid_app/Widgets/TopContainer.dart';
 import 'package:plasmacovid_app/views/SubmitionForm.dart';
 
-class Home extends StatelessWidget {
+class Home extends StatefulWidget {
+  @override
+  _HomeState createState() => _HomeState();
+}
+
+class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(

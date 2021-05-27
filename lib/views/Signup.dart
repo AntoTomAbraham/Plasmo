@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:plasmacovid_app/controllers/auth.dart';
 import 'package:plasmacovid_app/views/Home.dart';
 import 'package:plasmacovid_app/views/Signin.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class Signup extends StatefulWidget {
   @override
@@ -93,8 +95,13 @@ class _SignupState extends State<Signup> {
                   hoverColor: Color(0xff4649b8),
                   disabledColor: Color(0xff6a71b8),
                   focusColor: Color(0xff4a4da1),
-                  onPressed: () {
-                    Get.to(Home());
+                  onPressed: () async {
+                    signupp(email, password).whenComplete(() =>
+                        Navigator.of(context).pushReplacement(
+                            MaterialPageRoute(builder: (context) => Home())));
+                    final SharedPreferences sharedPreferences =
+                        await SharedPreferences.getInstance();
+                    sharedPreferences.setString("email", email);
                   },
                   splashColor: Color(0xff4c4e91),
                   highlightColor: Color(0xff4a4da1),
