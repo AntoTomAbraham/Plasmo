@@ -20,14 +20,14 @@ class _SubmitionFormState extends State<SubmitionForm> {
   String bloodGroup;
   String place;
   var _bloodgroup = [
-    "a+ve",
-    "a-ve",
-    "b+ve",
-    "b-ve",
-    "o+ve",
-    "o-ve",
-    "ab+ve",
-    "ab-ve",
+    "A+ve",
+    "A-ve",
+    "B+ve",
+    "B-ve",
+    "O+ve",
+    "O-ve",
+    "AB+ve",
+    "AB-ve",
   ];
   var _states = [
     "Kerala",

@@ -10,6 +10,7 @@ class BottomAppbar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BottomAppBar(
+      elevation: 5.0,
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
