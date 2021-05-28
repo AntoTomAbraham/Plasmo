@@ -1,7 +1,10 @@
+import 'package:eva_icons_flutter/eva_icons_flutter.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:plasmacovid_app/controllers/auth.dart';
+import 'package:plasmacovid_app/controllers/preferances.dart';
 import 'package:plasmacovid_app/views/Home.dart';
 import 'package:plasmacovid_app/views/Signup.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -99,9 +102,7 @@ class _SigninState extends State<Signin> {
                     signin(email, password).whenComplete(() =>
                         Navigator.of(context).pushReplacement(
                             MaterialPageRoute(builder: (context) => Home())));
-                    final SharedPreferences sharedPreferences =
-                        await SharedPreferences.getInstance();
-                    sharedPreferences.setString("email", email);
+                    Userpreferances.setUsername(email);
                   },
                   splashColor: Color(0xff4c4e91),
                   highlightColor: Color(0xff4a4da1),
@@ -116,6 +117,46 @@ class _SigninState extends State<Signin> {
                         color: Colors.white,
                         fontSize: 20,
                         fontWeight: FontWeight.w600,
+                      ),
+                    ),
+                  ),
+                ),
+                Padding(
+                  padding:
+                      const EdgeInsets.only(left: 48.0, right: 48.0, top: 8.0),
+                  child: RaisedButton(
+                    hoverColor: Colors.white,
+                    disabledColor: Colors.white,
+                    focusColor: Colors.white,
+                    onPressed: () async {
+                      googlesignin().whenComplete(() => Navigator.of(context)
+                          .pushReplacement(
+                              MaterialPageRoute(builder: (context) => Home())));
+                      // Userpreferances.setUsername(email);
+                    },
+                    splashColor: Colors.white,
+                    highlightColor: Colors.white,
+                    color: Colors.white,
+                    shape: StadiumBorder(),
+                    child: Padding(
+                      padding: const EdgeInsets.only(
+                          left: 28.0, top: 8.0, right: 28.0, bottom: 8.0),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Icon(
+                            EvaIcons.google,
+                            color: Colors.blue,
+                          ),
+                          Text(
+                            "Sign In",
+                            style: GoogleFonts.poppins(
+                              color: Colors.black,
+                              fontSize: 20,
+                              fontWeight: FontWeight.w600,
+                            ),
+                          ),
+                        ],
                       ),
                     ),
                   ),

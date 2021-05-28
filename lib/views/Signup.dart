@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:plasmacovid_app/controllers/auth.dart';
+import 'package:plasmacovid_app/controllers/preferances.dart';
 import 'package:plasmacovid_app/views/Home.dart';
 import 'package:plasmacovid_app/views/Signin.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -99,9 +100,7 @@ class _SignupState extends State<Signup> {
                     signupp(email, password).whenComplete(() =>
                         Navigator.of(context).pushReplacement(
                             MaterialPageRoute(builder: (context) => Home())));
-                    final SharedPreferences sharedPreferences =
-                        await SharedPreferences.getInstance();
-                    sharedPreferences.setString("email", email);
+                    Userpreferances.setUsername(email);
                   },
                   splashColor: Color(0xff4c4e91),
                   highlightColor: Color(0xff4a4da1),

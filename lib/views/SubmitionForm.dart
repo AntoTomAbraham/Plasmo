@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -12,6 +13,7 @@ class SubmitionForm extends StatefulWidget {
 }
 
 class _SubmitionFormState extends State<SubmitionForm> {
+  final db = FirebaseFirestore.instance;
   final _formKey = GlobalKey<FormState>();
   String name;
   String email;
@@ -184,7 +186,7 @@ class _SubmitionFormState extends State<SubmitionForm> {
                           isDense: false,
                           onChanged: (String newValue) {
                             setState(() {
-                              place = newValue;
+                              bloodGroup = newValue;
                             });
                           },
                           items: _bloodgroup.map((String value) {
@@ -242,7 +244,15 @@ class _SubmitionFormState extends State<SubmitionForm> {
               disabledColor: Color(0xff6a71b8),
               focusColor: Color(0xff4a4da1),
               onPressed: () {
-                Get.to(Home());
+                db.collection('data').add({
+                  'name': name,
+                  'location': place,
+                  'Blood Group': bloodGroup,
+                  'Number': phoneNumber,
+                  'Aadhar no': aadharno,
+                  'email': email,
+                }).whenComplete(() => Navigator.of(context).pushReplacement(
+                    MaterialPageRoute(builder: (context) => Home())));
               },
               splashColor: Color(0xff4c4e91),
               highlightColor: Color(0xff4a4da1),

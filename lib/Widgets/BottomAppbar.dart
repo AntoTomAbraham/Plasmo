@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
+import 'package:plasmacovid_app/views/Dataplasma.dart';
 import 'package:plasmacovid_app/views/Home.dart';
 import 'package:plasmacovid_app/views/Payment.dart';
 import 'package:plasmacovid_app/views/PlasmaData.dart';
@@ -38,7 +39,7 @@ class BottomAppbar extends StatelessWidget {
               color: Color(0xff93b8e6),
             ),
             onPressed: () {
-              Get.to(PlasmaData());
+              Get.to(Dataplasma());
             },
           ),
           IconButton(

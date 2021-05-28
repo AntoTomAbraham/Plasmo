@@ -2,6 +2,8 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:plasmacovid_app/controllers/preferances.dart';
+import 'package:plasmacovid_app/views/Home.dart';
 import 'package:plasmacovid_app/views/Onboard.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -14,7 +16,7 @@ class _SplashScreenState extends State<SplashScreen> {
   String name;
   @override
   void setState(fn) {
-    //name = Userpreferance.getUsername("name");
+    name = Userpreferances.getUsername("name");
     super.setState(fn);
   }
 
@@ -27,12 +29,12 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   Widget build(BuildContext context) {
     Timer(Duration(seconds: 5), () {
-      if (name != null) {
+      if (name == null) {
         Navigator.of(context).pushReplacement(
             MaterialPageRoute(builder: (BuildContext context) => Onboard()));
       } else {
         Navigator.of(context).pushReplacement(
-            MaterialPageRoute(builder: (BuildContext context) => Onboard()));
+            MaterialPageRoute(builder: (BuildContext context) => Home()));
       }
     });
     return Scaffold(
