@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:plasmacovid_app/controllers/auth.dart';
 import 'package:plasmacovid_app/controllers/preferances.dart';
+import 'package:plasmacovid_app/views/Body.dart';
 import 'package:plasmacovid_app/views/Home.dart';
 import 'package:plasmacovid_app/views/Signin.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -122,7 +123,7 @@ class _SignupState extends State<Signup> {
                 SizedBox(height: 20),
                 GestureDetector(
                   onTap: () {
-                    Get.to(Signin());
+                    Get.to(Body());
                   },
                   child: Text("Already a customer?Login",
                       style: GoogleFonts.poppins(

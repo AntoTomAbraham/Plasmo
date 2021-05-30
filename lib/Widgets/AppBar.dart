@@ -2,7 +2,12 @@ import 'package:eva_icons_flutter/eva_icons_flutter.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
-class Appbar extends StatelessWidget {
+class Appbar extends StatefulWidget {
+  @override
+  _AppbarState createState() => _AppbarState();
+}
+
+class _AppbarState extends State<Appbar> {
   @override
   Widget build(BuildContext context) {
     return Container(

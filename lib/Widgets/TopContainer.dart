@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class TopContainer extends StatelessWidget {
   @override
@@ -61,8 +62,22 @@ class TopContainer extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
-              rbutton("Call now", Icons.call, Colors.red),
-              rbutton("Send SMS", Icons.message, Colors.blue)
+              rbutton(
+                "Call now",
+                Icons.call,
+                Colors.red,
+                () {
+                  launch("tel://8547847301");
+                },
+              ),
+              rbutton(
+                "Send SMS",
+                Icons.message,
+                Colors.blue,
+                () {
+                  launch("sms:8547847301");
+                },
+              )
             ],
           ),
         ],
@@ -70,18 +85,14 @@ class TopContainer extends StatelessWidget {
     );
   }
 
-  Widget rbutton(
-    String term,
-    IconData icon,
-    Color colour,
-  ) {
+  Widget rbutton(String term, IconData icon, Color colour, Function funn) {
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: RaisedButton(
         hoverColor: colour,
         disabledColor: colour,
         focusColor: colour,
-        onPressed: () {},
+        onPressed: funn,
         splashColor: colour,
         highlightColor: colour,
         color: colour,

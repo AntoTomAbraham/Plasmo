@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:plasmacovid_app/controllers/preferances.dart';
 
 FirebaseAuth auth = FirebaseAuth.instance;
 final googleSignIn = GoogleSignIn();
@@ -15,6 +16,8 @@ Future<bool> googlesignin() async {
     UserCredential result = await auth.signInWithCredential(credential);
     User user = await result.user;
     print(user.uid);
+    //String usUId = user.email;
+    //Userpreferances.setUsername(user.email);
     return Future.value(true);
   }
 }

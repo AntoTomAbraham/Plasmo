@@ -6,6 +6,7 @@ import 'package:plasmacovid_app/Service/ManageData.dart';
 import 'package:plasmacovid_app/Widgets/BottomAppbar.dart';
 import 'package:plasmacovid_app/Widgets/SubAppbar.dart';
 import 'package:provider/provider.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class Dataplasma extends StatefulWidget {
   @override
@@ -96,9 +97,18 @@ class _DataplasmaState extends State<Dataplasma> {
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: [
-                          rbutton("Whatsapp", FontAwesomeIcons.whatsapp,
-                              Colors.green),
-                          rbutton("Chat", Icons.chat, Colors.red),
+                          rbutton(
+                            "Whatsapp",
+                            FontAwesomeIcons.whatsapp,
+                            Colors.green,
+                            snapshot.data[index].data()['Number'],
+                          ),
+                          rrbutton(
+                            "Chat",
+                            Icons.chat,
+                            Colors.red,
+                            snapshot.data[index].data()['Number'],
+                          ),
                         ],
                       )
                     ],
@@ -126,11 +136,52 @@ class _DataplasmaState extends State<Dataplasma> {
     );
   }
 
-  Widget rbutton(
-    String term,
-    IconData icon,
-    Color colour,
-  ) {
+  void launchWhatsappmessage({@required number, @required message}) async {
+    String url = "whatsapp://send?phone=$number&text=$message";
+    await canLaunch(url) ? launch(url) : print("Can't open whatsapp");
+  }
+
+  Widget rbutton(String term, IconData icon, Color colour, String number) {
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: RaisedButton(
+        hoverColor: colour,
+        disabledColor: colour,
+        focusColor: colour,
+        onPressed: () {
+          launchWhatsappmessage(
+              number: number, message: "message from plasma donation");
+        },
+        splashColor: colour,
+        highlightColor: colour,
+        color: colour,
+        shape: StadiumBorder(),
+        child: Padding(
+          padding: const EdgeInsets.only(
+              left: 8.0, top: 8.0, right: 8.0, bottom: 8.0),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              Icon(
+                icon,
+                color: Colors.white,
+              ),
+              Text(
+                term,
+                style: GoogleFonts.poppins(
+                  color: Colors.white,
+                  fontSize: 15,
+                  //fontWeight: FontWeight.w600,
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget rrbutton(String term, IconData icon, Color colour, String number) {
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: RaisedButton(
