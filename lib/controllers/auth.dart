@@ -1,6 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
-import 'package:plasmacovid_app/controllers/preferances.dart';
+import 'package:plasmacovid_app/controllers/Userpreferances.dart';
 
 FirebaseAuth auth = FirebaseAuth.instance;
 final googleSignIn = GoogleSignIn();
@@ -17,15 +17,15 @@ Future<bool> googlesignin() async {
     User user = await result.user;
     print(user.uid);
     //String usUId = user.email;
-    //Userpreferances.setUsername(user.email);
+    Userpreferances.setemail(user.email);
     return Future.value(true);
   }
 }
 
 Future<bool> signin(String email, String password) async {
   try {
-    UserCredential result =
-        await auth.signInWithEmailAndPassword(email: email, password: password);
+    UserCredential result = await auth.signInWithEmailAndPassword(
+        email: email.trim(), password: password.trim());
     User user = result.user;
     return Future.value(true);
   } catch (e) {
@@ -39,7 +39,7 @@ Future<bool> signin(String email, String password) async {
 Future<bool> signupp(String email, String password) async {
   try {
     UserCredential result = await auth.createUserWithEmailAndPassword(
-        email: email, password: password);
+        email: email.trim(), password: password.trim());
     User user = result.user;
     return Future.value(true);
   } catch (e) {

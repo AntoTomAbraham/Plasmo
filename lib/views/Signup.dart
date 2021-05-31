@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:plasmacovid_app/controllers/auth.dart';
-import 'package:plasmacovid_app/controllers/preferances.dart';
+import 'package:plasmacovid_app/controllers/Userpreferances.dart';
 import 'package:plasmacovid_app/views/Body.dart';
 import 'package:plasmacovid_app/views/Home.dart';
 import 'package:plasmacovid_app/views/Signin.dart';
@@ -100,8 +100,8 @@ class _SignupState extends State<Signup> {
                   onPressed: () async {
                     signupp(email, password).whenComplete(() =>
                         Navigator.of(context).pushReplacement(
-                            MaterialPageRoute(builder: (context) => Home())));
-                    Userpreferances.setUsername(email);
+                            MaterialPageRoute(builder: (context) => Body())));
+                    await Userpreferances.setemail(email);
                   },
                   splashColor: Color(0xff4c4e91),
                   highlightColor: Color(0xff4a4da1),
@@ -123,7 +123,7 @@ class _SignupState extends State<Signup> {
                 SizedBox(height: 20),
                 GestureDetector(
                   onTap: () {
-                    Get.to(Body());
+                    Get.to(Signin());
                   },
                   child: Text("Already a customer?Login",
                       style: GoogleFonts.poppins(

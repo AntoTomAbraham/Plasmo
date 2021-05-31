@@ -4,7 +4,8 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:plasmacovid_app/controllers/auth.dart';
-import 'package:plasmacovid_app/controllers/preferances.dart';
+import 'package:plasmacovid_app/controllers/Userpreferances.dart';
+import 'package:plasmacovid_app/views/Body.dart';
 import 'package:plasmacovid_app/views/Home.dart';
 import 'package:plasmacovid_app/views/Signup.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -101,8 +102,8 @@ class _SigninState extends State<Signin> {
                   onPressed: () async {
                     signin(email, password).whenComplete(() =>
                         Navigator.of(context).pushReplacement(
-                            MaterialPageRoute(builder: (context) => Home())));
-                    Userpreferances.setUsername(email);
+                            MaterialPageRoute(builder: (context) => Body())));
+                    await Userpreferances.setemail(email);
                   },
                   splashColor: Color(0xff4c4e91),
                   highlightColor: Color(0xff4a4da1),
@@ -131,8 +132,8 @@ class _SigninState extends State<Signin> {
                     onPressed: () async {
                       googlesignin().whenComplete(() => Navigator.of(context)
                           .pushReplacement(
-                              MaterialPageRoute(builder: (context) => Home())));
-                      // Userpreferances.setUsername(email);
+                              MaterialPageRoute(builder: (context) => Body())));
+                      Userpreferances.setemail("google signin");
                     },
                     splashColor: Colors.white,
                     highlightColor: Colors.white,

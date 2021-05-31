@@ -2,7 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:plasmacovid_app/controllers/preferances.dart';
+import 'package:plasmacovid_app/controllers/Userpreferances.dart';
 import 'package:plasmacovid_app/views/Home.dart';
 import 'package:plasmacovid_app/views/Onboard.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -13,28 +13,28 @@ class SplashScreen extends StatefulWidget {
 }
 
 class _SplashScreenState extends State<SplashScreen> {
-  String name;
+  String name = '';
   @override
   void setState(fn) {
-    name = Userpreferances.getUsername("name");
     super.setState(fn);
   }
 
   @override
   void initState() {
     // TODO: implement initState
+    name = Userpreferances.getemail("name") ?? '';
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
     Timer(Duration(seconds: 5), () {
-      if (name == null) {
-        Navigator.of(context).pushReplacement(
-            MaterialPageRoute(builder: (BuildContext context) => Onboard()));
-      } else {
+      if (name != null) {
         Navigator.of(context).pushReplacement(
             MaterialPageRoute(builder: (BuildContext context) => Home()));
+      } else {
+        Navigator.of(context).pushReplacement(
+            MaterialPageRoute(builder: (BuildContext context) => Onboard()));
       }
     });
     return Scaffold(
