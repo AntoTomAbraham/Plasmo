@@ -1,7 +1,13 @@
+import 'dart:io';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:file_picker/file_picker.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:image_picker/image_picker.dart';
+import 'package:permission_handler/permission_handler.dart';
 import 'package:plasmacovid_app/Widgets/BottomAppbar.dart';
 import 'package:plasmacovid_app/Widgets/subAppbar.dart';
 
@@ -21,6 +27,9 @@ class _SubmitionFormState extends State<SubmitionForm> {
   String phoneNumber;
   String bloodGroup;
   String place;
+  String imageurl;
+  PickedFile imagee;
+
   var _bloodgroup = [
     "A+ve",
     "A-ve",
@@ -234,6 +243,16 @@ class _SubmitionFormState extends State<SubmitionForm> {
                     ],
                   ),
                 ),
+                OutlinedButton(
+                  onPressed: () => selectFile(),
+                  style: ButtonStyle(
+                    shape: MaterialStateProperty.all(
+                      RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(30.0)),
+                    ),
+                  ),
+                  child: const Text("Upload you Aadhar card image"),
+                )
               ],
             ),
           ),
@@ -286,4 +305,33 @@ class _SubmitionFormState extends State<SubmitionForm> {
       ),
     );
   }
+
+  Future selectFile() async {
+    final picker = ImagePicker();
+    final _storage = FirebaseStorage.instance;
+    //PickedFile imag;
+    await Permission.photos.request();
+    var permissionStatus = await Permission.photos.status;
+    if (permissionStatus.isGranted) {
+      imagee = await picker.getImage(source: ImageSource.camera);
+      var file = File(imagee.path);
+      if (imagee != null) {
+        var snapshot =
+            await _storage.ref().child("Aadhar/${email}").putFile(file);
+        var downloadUrl = await snapshot.ref.getDownloadURL();
+        setState(() {
+          imageurl = downloadUrl;
+        });
+      } else {
+        print("No path");
+      }
+    } else {
+      print("grant permissions try again");
+    }
+    final result = await FilePicker.platform.pickFiles(allowMultiple: false);
+    if (result == null) return;
+    final path = result.files.single.path;
+  }
+
+  void imgUp() {}
 }
