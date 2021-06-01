@@ -133,7 +133,7 @@ class _SigninState extends State<Signin> {
                       googlesignin().whenComplete(() => Navigator.of(context)
                           .pushReplacement(
                               MaterialPageRoute(builder: (context) => Body())));
-                      Userpreferances.setemail("google signin");
+                      // Userpreferances.setemail("google signin");
                     },
                     splashColor: Colors.white,
                     highlightColor: Colors.white,

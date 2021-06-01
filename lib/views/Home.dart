@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
+import 'package:plasmacovid_app/Service/Notifications.dart';
 import 'package:plasmacovid_app/Widgets/AppBar.dart';
 import 'package:plasmacovid_app/Widgets/BottomAppbar.dart';
 import 'package:plasmacovid_app/Widgets/LiveCase.dart';
 import 'package:plasmacovid_app/Widgets/PreventionContainer.dart';
 import 'package:plasmacovid_app/Widgets/TopContainer.dart';
 import 'package:plasmacovid_app/views/SubmitionForm.dart';
+import 'package:provider/provider.dart';
 
 class Home extends StatefulWidget {
   @override
@@ -18,6 +20,13 @@ class _HomeState extends State<Home> {
   double yoffset = 0;
   double scaleFactor = 1;
   bool isDrawer = false;
+  @override
+  void initState() {
+    // TODO: implement initState
+    Provider.of<NotificationService>(context, listen: false).initialize();
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return AnimatedContainer(

@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:plasmacovid_app/Service/Notifications.dart';
+import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class TopContainer extends StatelessWidget {
@@ -59,26 +61,30 @@ class TopContainer extends StatelessWidget {
               ],
             ),
           ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
-              rbutton(
-                "Call now",
-                Icons.call,
-                Colors.red,
-                () {
-                  launch("tel://8547847301");
-                },
-              ),
-              rbutton(
-                "Send SMS",
-                Icons.message,
-                Colors.blue,
-                () {
-                  launch("sms:8547847301");
-                },
-              )
-            ],
+          Consumer<NotificationService>(
+            builder: (context, model, _) => Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                rbutton(
+                  "Call now",
+                  Icons.call,
+                  Colors.red,
+                  () {
+                    launch("tel://8547847301")
+                        .whenComplete(() => model.imageNotification());
+                  },
+                ),
+                rbutton(
+                  "Send SMS",
+                  Icons.message,
+                  Colors.blue,
+                  () {
+                    launch("sms:8547847301")
+                        .whenComplete(() => model.instantNotification());
+                  },
+                )
+              ],
+            ),
           ),
         ],
       ),
